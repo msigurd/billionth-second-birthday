@@ -39,7 +39,7 @@ main {
 
 form {
   width: 100%;
-  max-width: 22rem;
+  max-width: 26rem;
   > * + * { margin-top: 3rem }
 }
 
@@ -79,7 +79,7 @@ input {
 
 output {
   display: block;
-  font-size: clamp(28px, 8vw, 40px);
+  font-size: clamp(24px, 10cqi, 40px);
   font-weight: 700;
   letter-spacing: -.02em;
   line-height: 1.15;
@@ -109,6 +109,7 @@ footer {
 }
 
 #bsb-output-container {
+  container-type: inline-size;
   text-align: center;
   padding-top: 2.5rem;
   border-top: 1px solid var(--border);
