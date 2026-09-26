@@ -1,16 +1,32 @@
+:root {
+  color-scheme: dark;
+  --bg: #07070b;
+  --fg: #f4f4f6;
+  --muted: #8b8b99;
+  --border: #2a2a35;
+  --border-hover: #454555;
+  --surface: #111118;
+  --accent: #a78bfa;
+  --accent-2: #f0abfc;
+  --radius: .75rem;
+}
+
 html, body { height: 100% }
 
 html {
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif;
-  background-color: black;
+  background-color: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
 }
-
-html, input, a { color: white }
 
 body {
   margin: 0;
   display: flex;
   flex-direction: column;
+  background:
+    radial-gradient(60rem 40rem at 50% -10%, rgb(167 139 250 / .14), transparent 70%),
+    radial-gradient(40rem 30rem at 50% 110%, rgb(240 171 252 / .06), transparent 70%);
 }
 
 main {
@@ -22,43 +38,88 @@ main {
 }
 
 form {
-  > * + * { margin-top: 2rem }
+  width: 100%;
+  max-width: 22rem;
+  > * + * { margin-top: 3rem }
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 input {
+  box-sizing: border-box;
   display: block;
   width: 100%;
-  background-color: transparent;
-  font-size: 16px;
-  padding: .25rem;
-  font-family: inherit;
+  padding: .875rem 1rem;
+  font: inherit;
+  font-size: 18px;
+  color: var(--fg);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   outline: none;
-  border-color: gray;
-  &:hover { border-color: lightgray }
-  &:focus { border-color: white }
+  transition: border-color .15s, box-shadow .15s;
+  &:hover { border-color: var(--border-hover) }
+  &:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgb(167 139 250 / .2);
+  }
+  &::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: .6;
+    &:hover { opacity: 1 }
+  }
 }
 
 output {
   display: block;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: clamp(28px, 8vw, 40px);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 footer {
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   text-align: center;
   a {
     font-size: 12px;
+    color: var(--muted);
     text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--border-hover);
+    transition: color .15s;
+    &:hover, &:focus-visible { color: var(--fg) }
   }
 }
 
 #birthdate-input-container {
-  > * + * { margin-top: .5rem }
+  > * + * { margin-top: .625rem }
 }
 
 #bsb-output-container {
   text-align: center;
-  &.hidden { opacity: 0 }
-  > * + * { margin-top: .5rem }
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+  transition: opacity .4s ease, transform .4s ease;
+  &.hidden {
+    opacity: 0;
+    transform: translateY(.5rem);
+  }
+  > * + * { margin-top: .75rem }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important }
 }
