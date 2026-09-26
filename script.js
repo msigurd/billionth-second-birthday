@@ -16,7 +16,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     BSB_OUTPUT.value = new Date(new Date(birthdateString).getTime() + 1_000_000_000_000)
                          .toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    resetBsb();
     toggleBsb(true);
+  }
+
+  // Snap back to the hidden state without transitioning, so that showing it again replays the entrance animation
+  function resetBsb() {
+    BSB_OUTPUT_CONTAINER.style.transition = 'none';
+    toggleBsb(false);
+    BSB_OUTPUT_CONTAINER.offsetWidth; // Force reflow
+    BSB_OUTPUT_CONTAINER.style.transition = '';
   }
 
   function toggleBsb(on) {
